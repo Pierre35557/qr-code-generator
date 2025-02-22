@@ -1,0 +1,39 @@
+basePath: /api/v1
+info:
+  contact: {}
+  description: API service for generating QR codes using Echo.
+  title: qr-code-generator API
+  version: "1.0"
+paths:
+  /qrcode:
+    get:
+      consumes:
+      - application/json
+      description: Generate a QR code from a provided URL and return it as a PNG image.
+      parameters:
+      - description: URL to encode
+        in: query
+        name: url
+        required: true
+        type: string
+      - description: Size of the QR code image (default 256)
+        in: query
+        name: size
+        type: integer
+      produces:
+      - image/png
+      responses:
+        "200":
+          description: PNG image of the QR code
+          schema:
+            type: file
+        "400":
+          description: Error message
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Generate a QR code image
+      tags:
+      - qrcode
+swagger: "2.0"
